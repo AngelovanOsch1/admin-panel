@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angulargamewebsite": {
+      "hosting": {
+        "admin-panel": [
+          "angulargamewebsite"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angulargamewebsite"
+  }
+}
