@@ -5,6 +5,7 @@ import { RepositoryService } from '../services/repository.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastService } from '../services/toast.service';
+import { CustomValidators, onlyNumbersValidator } from 'src/validators';
 
 @Component({
   selector: 'app-add-article',
@@ -27,9 +28,15 @@ export class AddArticleComponent {
   addArticleForm: FormGroup = new FormGroup({
     productName: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
+    price: new FormControl('', [
+      Validators.required,
+      CustomValidators.onlyNumbersValidator(),
+    ]),
     targetAudience: new FormControl('', [Validators.required]),
-    stock: new FormControl('', [Validators.required]),
+    stock: new FormControl('', [
+      Validators.required,
+      CustomValidators.onlyNumbersValidator(),
+    ]),
     description: new FormControl('', [Validators.required]),
   });
 
@@ -40,6 +47,9 @@ export class AddArticleComponent {
     if (field!.touched || !field!.pristine) {
       if (field!.hasError('required')) {
         error = 'Dit veld is verplicht';
+      }
+      if (field!.hasError('onlyNumbers')) {
+        error = 'Alleen cijfers zijn toegstaan in dit veld';
       }
     }
     return error! as string;

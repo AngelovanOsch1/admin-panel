@@ -8,9 +8,9 @@
     <option [value]="targetAudience.WOMAN">Woman</option>
     <option [value]="targetAudience.CHILDREN">Children</option>
   </select>
-  <div class="loan-form__get-error">{{getError('category')}}</div>
+  <div class="loan-form__get-error">{{getError('targetAudience')}}</div>
   <label>Price:</label>
-  <input type="number" formControlName="price">
+  <input formControlName="price">
   <div class="loan-form__get-error">{{getError('price')}}</div>
   <label>Category:</label>
   <select formControlName="category">
@@ -19,9 +19,9 @@
     <option [value]="category.CAP">cap</option>
     <option [value]="category.SHOES">shoes</option>
   </select>
-  <div class="loan-form__get-error">{{getError('targetAudience')}}</div>
+  <div class="loan-form__get-error">{{getError('category')}}</div>
   <label>Stock:</label>
-  <input type="number" formControlName="stock">
+  <input formControlName="stock">
   <div class="loan-form__get-error">{{getError('stock')}}</div>
   <label>Description:</label>
   <textarea formControlName="description"></textarea>
