@@ -5,7 +5,7 @@ import { RepositoryService } from '../services/repository.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastService } from '../services/toast.service';
-import { CustomValidators, onlyNumbersValidator } from 'src/validators';
+import { CustomValidators } from 'src/validators';
 
 @Component({
   selector: 'app-add-article',
@@ -17,7 +17,6 @@ export class AddArticleComponent {
   targetAudience = targetAudience;
   category = Category;
   file?: File;
-  image?: string;
   constructor(
     private repositoryService: RepositoryService,
     private toastService: ToastService,
@@ -77,7 +76,10 @@ export class AddArticleComponent {
     const documentId = this.firestore.createId();
     const filePath = `shop/articles/${documentId}/${this.file?.name}`;
     await this.storage.upload(filePath, this.file);
-    this.image = await this.storage.ref(filePath).getDownloadURL().toPromise();
+    const image: string = await this.storage
+      .ref(filePath)
+      .getDownloadURL()
+      .toPromise();
 
     try {
       this.repositoryService.shop.doc(documentId).set({
@@ -87,7 +89,7 @@ export class AddArticleComponent {
         targetAudience: targetAudience,
         stock: stock,
         description: description,
-        image: this.image,
+        image: image,
       });
     } catch (e) {
       this.toastService.show(
