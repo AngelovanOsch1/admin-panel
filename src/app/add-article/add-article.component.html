@@ -1,0 +1,31 @@
+<form [formGroup]="addArticleForm">
+  <label for="productName">Product Name:</label>
+  <input formControlName="productName">
+  <div class="loan-form__get-error">{{getError('productName')}}</div>
+  <label>Target audience:</label>
+  <select formControlName="targetAudience">
+    <option [value]="targetAudience.MALE">Men</option>
+    <option [value]="targetAudience.WOMAN">Woman</option>
+    <option [value]="targetAudience.CHILDREN">Children</option>
+  </select>
+  <div class="loan-form__get-error">{{getError('category')}}</div>
+  <label>Price:</label>
+  <input type="number" formControlName="price">
+  <div class="loan-form__get-error">{{getError('price')}}</div>
+  <label>Category:</label>
+  <select formControlName="category">
+    <option [value]="category.TSHIRT">t-shirt</option>
+    <option [value]="category.HOODIE">hoodie</option>
+    <option [value]="category.CAP">cap</option>
+    <option [value]="category.SHOES">shoes</option>
+  </select>
+  <div class="loan-form__get-error">{{getError('targetAudience')}}</div>
+  <label>Stock:</label>
+  <input type="number" formControlName="stock">
+  <div class="loan-form__get-error">{{getError('stock')}}</div>
+  <label>Description:</label>
+  <textarea formControlName="description"></textarea>
+  <div class="loan-form__get-error">{{getError('description')}}</div>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="submitForm()">Submit</button>
+</form>
