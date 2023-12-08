@@ -3,13 +3,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Category, targetAudience } from 'src/enums';
 import { RepositoryService } from '../services/repository.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-add-article',
   templateUrl: './add-article.component.html',
   styleUrls: ['./add-article.component.scss'],
-  providers: [RepositoryService],
+  providers: [RepositoryService, ToastService],
 })
 export class AddArticleComponent {
   targetAudience = targetAudience;
@@ -18,7 +19,9 @@ export class AddArticleComponent {
   image?: string;
   constructor(
     private repositoryService: RepositoryService,
-    private storage: AngularFireStorage
+    private toastService: ToastService,
+    private storage: AngularFireStorage,
+    private firestore: AngularFirestore
   ) {}
 
   addArticleForm: FormGroup = new FormGroup({
@@ -61,14 +64,13 @@ export class AddArticleComponent {
     const description: string =
       this.addArticleForm.controls['description'].value;
 
-    const filePath = `shop/articles/${this.file?.name}`;
-
+    const documentId = this.firestore.createId();
+    const filePath = `shop/articles/${documentId}/${this.file?.name}`;
     await this.storage.upload(filePath, this.file);
-
     this.image = await this.storage.ref(filePath).getDownloadURL().toPromise();
 
     try {
-      this.repositoryService.shop.doc().set({
+      this.repositoryService.shop.doc(documentId).set({
         productName: productName,
         category: category,
         price: price,
@@ -78,7 +80,9 @@ export class AddArticleComponent {
         image: this.image,
       });
     } catch (e) {
-      console.log(e);
+      this.toastService.show(
+        'Oeps! Er is iets verkeerd gegaan. Probeer het later nog een keer'
+      );
     }
   }
 }
