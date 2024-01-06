@@ -1,11 +1,18 @@
-export enum Category {
+export enum Product {
   TSHIRT = 'tshirt',
   HOODIE = 'hoodie',
-  CAP = 'cap',
+  PANTS = 'pants',
   SHOES = 'shoes',
+  CAP = 'cap',
+  WRISTWEAR = 'wristwear',
 }
 
-export enum targetAudience {
+export enum ProductCategory {
+  CLOTHINGCATEGORY = 'clothingCategory',
+  GAMINGCATEGORY = 'gamingCategory',
+  HOMEBASICSCATEGORY = 'homeBasicsCategory',
+}
+export enum TargetAudience {
   MALE = 'male',
   WOMAN = 'women',
   CHILDREN = 'children',

@@ -9,7 +9,8 @@ export interface User {
 
 export interface Article {
   productName: string;
-  category: string;
+  productCategory: string;
+  product: string;
   price: number;
   targetAudience: string;
   stock: number;

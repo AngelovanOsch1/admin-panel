@@ -2,6 +2,23 @@
   <label for="productName">Product Name:</label>
   <input formControlName="productName">
   <div>{{getError('productName')}}</div>
+    <label>Product category:</label>
+    <select formControlName="productCategory">
+      <option [value]="productCategory.CLOTHINGCATEGORY">clothing category</option>
+      <option [value]="productCategory.GAMINGCATEGORY">gaming category</option>
+      <option [value]="productCategory.HOMEBASICSCATEGORY">home basics category</option>
+    </select>
+    <div>{{getError('productCategory')}}</div>
+    <label *ngIf="addArticleForm.controls['productCategory'].value === 'clothingCategory'">Category:</label>
+    <select *ngIf="addArticleForm.controls['productCategory'].value === 'clothingCategory'" formControlName="category">
+      <option [value]="product.TSHIRT">t-shirt</option>
+      <option [value]="product.HOODIE">hoodie</option>
+      <option [value]="product.PANTS">pants</option>
+      <option [value]="product.SHOES">shoes</option>
+      <option [value]="product.CAP">cap</option>
+      <option [value]="product.WRISTWEAR">wristwear</option>
+    </select>
+    <div></div>
   <label>Target audience:</label>
   <select formControlName="targetAudience">
     <option [value]="targetAudience.MALE">Men</option>
@@ -12,14 +29,6 @@
   <label>Price:</label>
   <input formControlName="price">
   <div>{{getError('price')}}</div>
-  <label>Category:</label>
-  <select formControlName="category">
-    <option [value]="category.TSHIRT">t-shirt</option>
-    <option [value]="category.HOODIE">hoodie</option>
-    <option [value]="category.CAP">cap</option>
-    <option [value]="category.SHOES">shoes</option>
-  </select>
-  <div>{{getError('category')}}</div>
   <label>Stock:</label>
   <input formControlName="stock">
   <div>{{getError('stock')}}</div>

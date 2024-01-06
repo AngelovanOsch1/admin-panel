@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Category, targetAudience } from 'src/enums';
+import { Product, ProductCategory, TargetAudience } from 'src/enums';
 import { RepositoryService } from '../services/repository.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -14,8 +14,10 @@ import { CustomValidators } from 'src/validators';
   providers: [RepositoryService, ToastService],
 })
 export class AddArticleComponent {
-  targetAudience = targetAudience;
-  category = Category;
+  targetAudience = TargetAudience;
+
+  productCategory = ProductCategory;
+  product = Product;
   file?: File;
   constructor(
     private repositoryService: RepositoryService,
@@ -26,7 +28,8 @@ export class AddArticleComponent {
 
   addArticleForm: FormGroup = new FormGroup({
     productName: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    productCategory: new FormControl('', [Validators.required]),
+    product: new FormControl(''),
     price: new FormControl('', [
       Validators.required,
       CustomValidators.onlyNumbersValidator(),
@@ -65,6 +68,8 @@ export class AddArticleComponent {
 
     const productName: string =
       this.addArticleForm.controls['productName'].value;
+    const productCategory: string =
+      this.addArticleForm.controls['productCategory'].value;
     const category: string = this.addArticleForm.controls['category'].value;
     const price: number = this.addArticleForm.controls['price'].value;
     const targetAudience: string =
@@ -84,6 +89,7 @@ export class AddArticleComponent {
     try {
       this.repositoryService.shop.doc(documentId).set({
         productName: productName,
+        productCategory: productCategory,
         category: category,
         price: price,
         targetAudience: targetAudience,
