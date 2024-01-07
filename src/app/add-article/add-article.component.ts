@@ -47,19 +47,19 @@ export class AddArticleComponent {
   }
 
   addArticleForm: FormGroup = new FormGroup({
-    productName: new FormControl([Validators.required]),
-    category: new FormControl([Validators.required]),
-    product: new FormControl([Validators.required]),
-    price: new FormControl([
+    productName: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    product: new FormControl('', [Validators.required]),
+    price: new FormControl('', [
       Validators.required,
       CustomValidators.onlyNumbersValidator(),
     ]),
-    targetAudience: new FormControl([Validators.required]),
-    stock: new FormControl([
+    targetAudience: new FormControl('', [Validators.required]),
+    stock: new FormControl('', [
       Validators.required,
       CustomValidators.onlyNumbersValidator(),
     ]),
-    description: new FormControl([Validators.required]),
+    description: new FormControl('', [Validators.required]),
   });
 
   getError(name: string) {
@@ -116,6 +116,8 @@ export class AddArticleComponent {
         description: description,
         image: image,
       });
+      this.toastService.show('Article has been added to the shop!');
+      this.addArticleForm.reset();
     } catch (e) {
       this.toastService.show(
         'Oeps! Er is iets verkeerd gegaan. Probeer het later nog een keer'
