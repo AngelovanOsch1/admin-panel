@@ -33,7 +33,7 @@
     <select *ngIf="addArticleForm.controls['category'].value === 'clothesCollection'" formControlName="targetAudience">
       <option [value]="targetAudience.Men">Men</option>
       <option [value]="targetAudience.WOMEN">Woman</option>
-    <option [value]="targetAudience.CHILDREN">Children</option>
+    <option [value]="targetAudience.UNISEX">Unisex</option>
   </select>
   <div>{{getError('targetAudience')}}</div>
   <label>Price:</label>

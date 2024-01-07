@@ -27,5 +27,5 @@ export enum Category {
 export enum TargetAudience {
   Men = 'men',
   WOMEN = 'women',
-  CHILDREN = 'children',
+  UNISEX = 'unisex',
 }
