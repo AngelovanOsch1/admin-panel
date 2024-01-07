@@ -1,19 +1,31 @@
-export enum Product {
+export enum ClothesCollection {
   TSHIRT = 'tshirt',
   HOODIE = 'hoodie',
-  PANTS = 'pants',
-  SHOES = 'shoes',
+  PANTS = 'pant',
+  SHOE = 'shoe',
   CAP = 'cap',
   WRISTWEAR = 'wristwear',
 }
 
-export enum ProductCategory {
-  CLOTHINGCATEGORY = 'clothingCategory',
-  GAMINGCATEGORY = 'gamingCategory',
-  HOMEBASICSCATEGORY = 'homeBasicsCategory',
+export enum GamingAccessories {
+  MOUSE = 'mouse',
+  KEYBOARD = 'keyboard',
+  HEADSET = 'headset',
+}
+
+export enum HomeBasics {
+  CANDLE = 'candle',
+  VASE = 'vase',
+  LIGHT = 'light',
+}
+
+export enum Category {
+  CLOTHESCOLLECTION = 'clothesCollection',
+  GAMINGACCESSORY = 'gamingAccessory',
+  HOMEBASIC = 'homeBasic',
 }
 export enum TargetAudience {
-  MALE = 'male',
-  WOMAN = 'women',
+  Men = 'men',
+  WOMEN = 'women',
   CHILDREN = 'children',
 }

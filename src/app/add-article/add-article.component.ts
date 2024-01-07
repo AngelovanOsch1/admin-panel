@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Product, ProductCategory, TargetAudience } from 'src/enums';
+import {
+  ClothesCollection,
+  Category,
+  TargetAudience,
+  GamingAccessories,
+  HomeBasics,
+} from 'src/enums';
 import { RepositoryService } from '../services/repository.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -15,9 +21,10 @@ import { CustomValidators } from 'src/validators';
 })
 export class AddArticleComponent {
   targetAudience = TargetAudience;
-
-  productCategory = ProductCategory;
-  product = Product;
+  category = Category;
+  clothesCollection = ClothesCollection;
+  gamingAccessories = GamingAccessories;
+  homeBasics = HomeBasics;
   file?: File;
   constructor(
     private repositoryService: RepositoryService,
@@ -26,20 +33,33 @@ export class AddArticleComponent {
     private firestore: AngularFirestore
   ) {}
 
+  ngOnInit() {
+    this.addArticleForm.controls['category'].valueChanges.subscribe((value) => {
+      if (value === 'clothesCollection') {
+        this.addArticleForm
+          .get('targetAudience')
+          ?.setValidators(Validators.required);
+      } else {
+        this.addArticleForm.get('targetAudience')?.clearValidators();
+        this.addArticleForm.get('targetAudience')?.updateValueAndValidity();
+      }
+    });
+  }
+
   addArticleForm: FormGroup = new FormGroup({
-    productName: new FormControl('', [Validators.required]),
-    productCategory: new FormControl('', [Validators.required]),
-    product: new FormControl(''),
-    price: new FormControl('', [
+    productName: new FormControl([Validators.required]),
+    category: new FormControl([Validators.required]),
+    product: new FormControl([Validators.required]),
+    price: new FormControl([
       Validators.required,
       CustomValidators.onlyNumbersValidator(),
     ]),
-    targetAudience: new FormControl('', [Validators.required]),
-    stock: new FormControl('', [
+    targetAudience: new FormControl([Validators.required]),
+    stock: new FormControl([
       Validators.required,
       CustomValidators.onlyNumbersValidator(),
     ]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl([Validators.required]),
   });
 
   getError(name: string) {
@@ -68,9 +88,8 @@ export class AddArticleComponent {
 
     const productName: string =
       this.addArticleForm.controls['productName'].value;
-    const productCategory: string =
-      this.addArticleForm.controls['productCategory'].value;
     const category: string = this.addArticleForm.controls['category'].value;
+    const product: string = this.addArticleForm.controls['product'].value;
     const price: number = this.addArticleForm.controls['price'].value;
     const targetAudience: string =
       this.addArticleForm.controls['targetAudience'].value;
@@ -89,8 +108,8 @@ export class AddArticleComponent {
     try {
       this.repositoryService.shop.doc(documentId).set({
         productName: productName,
-        productCategory: productCategory,
         category: category,
+        product: product,
         price: price,
         targetAudience: targetAudience,
         stock: stock,

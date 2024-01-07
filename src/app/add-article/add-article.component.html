@@ -3,26 +3,36 @@
   <input formControlName="productName">
   <div>{{getError('productName')}}</div>
     <label>Product category:</label>
-    <select formControlName="productCategory">
-      <option [value]="productCategory.CLOTHINGCATEGORY">clothing category</option>
-      <option [value]="productCategory.GAMINGCATEGORY">gaming category</option>
-      <option [value]="productCategory.HOMEBASICSCATEGORY">home basics category</option>
+    <select formControlName="category">
+      <option [value]="category.CLOTHESCOLLECTION">Clothing category</option>
+      <option [value]="category.GAMINGACCESSORY">Gaming accessories</option>
+      <option [value]="category.HOMEBASIC">Home basics</option>
     </select>
-    <div>{{getError('productCategory')}}</div>
-    <label *ngIf="addArticleForm.controls['productCategory'].value === 'clothingCategory'">Category:</label>
-    <select *ngIf="addArticleForm.controls['productCategory'].value === 'clothingCategory'" formControlName="category">
-      <option [value]="product.TSHIRT">t-shirt</option>
-      <option [value]="product.HOODIE">hoodie</option>
-      <option [value]="product.PANTS">pants</option>
-      <option [value]="product.SHOES">shoes</option>
-      <option [value]="product.CAP">cap</option>
-      <option [value]="product.WRISTWEAR">wristwear</option>
+    <div>{{getError('category')}}</div>
+    <label *ngIf="addArticleForm.controls['category'].value">Category:</label>
+    <select *ngIf="addArticleForm.controls['category'].value === 'clothesCollection'" formControlName="product">
+      <option [value]="clothesCollection.TSHIRT">T-shirt</option>
+      <option [value]="clothesCollection.HOODIE">Hoodie</option>
+      <option [value]="clothesCollection.PANTS">Pants</option>
+      <option [value]="clothesCollection.SHOE">Shoe</option>
+      <option [value]="clothesCollection.CAP">Cap</option>
+      <option [value]="clothesCollection.WRISTWEAR">Wristwear</option>
     </select>
-    <div></div>
-  <label>Target audience:</label>
-  <select formControlName="targetAudience">
-    <option [value]="targetAudience.MALE">Men</option>
-    <option [value]="targetAudience.WOMAN">Woman</option>
+    <select *ngIf="addArticleForm.controls['category'].value === 'gamingAccessory'" formControlName="product">
+      <option [value]="gamingAccessories.HEADSET">Headset</option>
+      <option [value]="gamingAccessories.KEYBOARD">Keyboard</option>
+      <option [value]="gamingAccessories.MOUSE">Mouse</option>
+    </select>
+    <select *ngIf="addArticleForm.controls['category'].value === 'homeBasic'" formControlName="product">
+      <option [value]="homeBasics.CANDLE">Candle</option>
+      <option [value]="homeBasics.LIGHT">Light</option>
+      <option [value]="homeBasics.VASE">Vase</option>
+    </select>
+    <div>{{getError('product')}}</div>
+    <label *ngIf="addArticleForm.controls['category'].value === 'clothesCollection'">Target audience:</label>
+    <select *ngIf="addArticleForm.controls['category'].value === 'clothesCollection'" formControlName="targetAudience">
+      <option [value]="targetAudience.Men">Men</option>
+      <option [value]="targetAudience.WOMEN">Woman</option>
     <option [value]="targetAudience.CHILDREN">Children</option>
   </select>
   <div>{{getError('targetAudience')}}</div>
