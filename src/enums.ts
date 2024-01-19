@@ -1,7 +1,7 @@
 export enum ClothesCollection {
   TSHIRT = 'tshirt',
   HOODIE = 'hoodie',
-  PANTS = 'pant',
+  PANTS = 'pants',
   SHOE = 'shoe',
   CAP = 'cap',
   WRISTWEAR = 'wristwear',
