@@ -1,22 +1,22 @@
 export enum ClothesCollection {
-  TSHIRT = 'tshirt',
-  HOODIE = 'hoodie',
+  TSHIRT = 'tshirts',
+  HOODIE = 'hoodies',
   PANTS = 'pants',
-  SHOE = 'shoe',
-  CAP = 'cap',
-  WRISTWEAR = 'wristwear',
+  SHOE = 'shoes',
+  CAP = 'caps',
+  WRISTWEAR = 'wristwears',
 }
 
 export enum GamingAccessories {
-  MOUSE = 'mouse',
-  KEYBOARD = 'keyboard',
-  HEADSET = 'headset',
+  MOUSE = 'mice',
+  KEYBOARD = 'keyboards',
+  HEADSET = 'headsets',
 }
 
 export enum HomeBasics {
-  CANDLE = 'candle',
-  VASE = 'vase',
-  LIGHT = 'light',
+  CANDLE = 'candles',
+  VASE = 'vases',
+  LIGHT = 'lights',
 }
 
 export enum Category {
